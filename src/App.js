@@ -133,23 +133,8 @@ export default function App({ $target }) {
 
       const closeList = getStorage('close', []);
       const hideList = getStorage('hide', []);
-
-      if ($navButton.classList.contains('toggled')) {
-        $navButton.classList.remove('toggled');
-        closeList.push(id);
-        addStorage('close', closeList);
-
-        $navButton.innerHTML = '▶';
-      } else {
-        $navButton.classList.add('toggled');
-        $navButton.innerHTML = '▼';
-        const removeId = closeList.indexOf(id);
-        closeList.splice(removeId, 1);
-        addStorage('close', closeList);
-      }
-      console.log('doc', doc);
-      const findChild = (parentNode) => {
-        console.log(parentNode);
+      // 자식 문서 보여주기
+      const showChild = (parentNode) => {
         if (parentNode.length !== 0) {
           parentNode.forEach((child) => {
             const $childNav = document.querySelector(
@@ -157,24 +142,60 @@ export default function App({ $target }) {
             );
 
             if ($childNav) {
-              if ($childNav.classList.contains('hidden')) {
-                $childNav.classList.remove('hidden');
-                const hideId = hideList.indexOf(id);
-                hideList.splice(hideId, 1);
-                addStorage('hide', hideList);
-              } else {
-                $childNav.classList.add('hidden');
-                hideList.push(child.id.toString());
-                addStorage('hide', hideList);
-              }
+              $childNav.classList.remove('hidden');
+              const hideId = hideList.indexOf(id);
+
+              hideList.splice(hideId, 1);
+
+              addStorage('hide', hideList);
             }
 
-            findChild(child.documents);
+            showChild(child.documents);
+          });
+        }
+      };
+      // 자식 문서 숨기기
+      const hideChild = (parentNode) => {
+        if (parentNode.length !== 0) {
+          parentNode.forEach((child) => {
+            const $childNav = document.querySelector(
+              `.nav-document-container[data-id="${child.id}"]`
+            );
+
+            if ($childNav) {
+              $childNav.classList.add('hidden');
+
+              const hideId = hideList.indexOf(id);
+
+              if (hideId === -1) {
+                hideList.push(child.id.toString());
+              }
+
+              addStorage('hide', hideList);
+            }
+
+            hideChild(child.documents);
           });
         }
       };
 
-      findChild(documents);
+      if ($navButton.classList.contains('toggled')) {
+        $navButton.classList.remove('toggled');
+        closeList.push(id);
+        addStorage('close', closeList);
+
+        $navButton.innerHTML = '▶';
+
+        hideChild(documents);
+      } else {
+        $navButton.classList.add('toggled');
+        $navButton.innerHTML = '▼';
+        const removeId = closeList.indexOf(id);
+        closeList.splice(removeId, 1);
+        addStorage('close', closeList);
+
+        showChild(documents);
+      }
     },
   });
 
