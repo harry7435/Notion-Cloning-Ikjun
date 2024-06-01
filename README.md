@@ -1,30 +1,17 @@
-# 📌 5주차 프로젝트[Project1]
+# Ikjun Notion
+![노션 클로닝 메인화면 스크린샷](https://github.com/harry7435/Notion-Cloning-Ikjun/assets/70748442/d1eefa68-4b02-4522-ae72-ce724a059c74)
 
-- 기본 요구사항  
-  바닐라 JS만을 이용해 노션을 클로닝합니다.  
-  기본적인 레이아웃은 노션과 같으며, 스타일링, 컬러값 등은 원하는대로 커스텀합니다.
+## 개요
+바닐라 자바스크립트로 Notion 주요 기능을 클론 코딩한 개인 프로젝트
 
-- [x] 글 단위를 Document라고 합니다. Document는 Document 여러개를 포함할 수 있습니다.
-
-- [x] 화면 좌측에 Root Documents를 불러오는 API를 통해 루트 Documents를 렌더링합니다.
-
-- [x] Root Document를 클릭하면 오른쪽 편집기 영역에 해당 Document의 Content를 렌더링합니다.
-
-- [x] 해당 Root Document에 하위 Document가 있는 경우, 해당 Document 아래에 트리 형태로 렌더링 합니다.
-
-- [x] Document Tree에서 각 Document 우측에는 + 버튼이 있습니다. 해당 버튼을 클릭하면, 클릭한 Document의 하위 Document로 새 Document를 생성하고 편집화면으로 넘깁니다.
-
-- [x] 편집기에는 기본적으로 저장 버튼이 없습니다. Document Save API를 이용해 지속적으로 서버에 저장되도록 합니다.
-
-- [x] History API를 이용해 SPA 형태로 만듭니다.
-
-- [x] 루트 URL 접속 시엔 별다른 편집기 선택이 안 된 상태입니다.
-
-- [x] /documents/{documentId} 로 접속시, 해당 Document 의 content를 불러와 편집기에 로딩합니다.
-
-- 보너스 요구사항
-  기본적으로 편집기는 textarea 기반으로 단순한 텍스트 편집기로 시작하되, 여력이 되면 div와 contentEditable을 조합해서 좀 더 Rich한 에디터를 만들어봅니다.
-
-- [x] 편집기 최하단에는 현재 편집 중인 Document의 하위 Document 링크를 렌더링하도록 추가합니다.
-
-- [ ] 편집기 내에서 다른 Document name을 적은 경우, 자동으로 해당 Document의 편집 페이지로 이동하는 링크를 거는 기능을 추가합니다.
+## 목표
+- SPA, 상태 관리, 비동기 통신 로직을 구현하면서 자바스크립트 언어 숙달
+- 순수 자바스크립트로 SPA 웹 페이지를 구현
+- 컴포넌트 기반 코드 작성 및 상태 관리 구현
+    
+## 핵심 기능
+- 글 추가, 수정, 삭제 가능
+- 왼쪽 네비바에서 글 목록을 트리 형태로 탐색 가능
+  - 하위 페이지 링크 조회 가능
+- 문서 에디터 기능 : contenteditable 속성과 Range & Selection 객체로 구현
+  - 마크다운 `#` 소제목 적용 가능
